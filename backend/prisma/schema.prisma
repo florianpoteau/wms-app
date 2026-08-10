@@ -21,4 +21,5 @@ model User {
   passwordhashed String
   role           Roles @default(OPERATOR)
   createdAt      DateTime @default(now())
+  updatedAt DateTime @updatedAt
 } 
