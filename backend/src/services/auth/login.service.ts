@@ -38,12 +38,5 @@ export async function loginUserService(data: UserloginInput) {
 
   return {
     token,
-    user: {
-      id: user.id,
-      email: user.email,
-      firstname: user.firstname,
-      name: user.name,
-      role: user.role,
-    },
   };
 }
