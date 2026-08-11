@@ -26,6 +26,7 @@
     "@types/node": "^26.2.0",
     "dotenv": "^17.4.2",
     "prisma": "^7.9.1",
+    "prisma-erd-generator": "^2.4.4",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }
