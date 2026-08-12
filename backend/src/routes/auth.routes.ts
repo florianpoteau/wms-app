@@ -7,7 +7,7 @@ import { authMiddleware } from "../middlewares/validateJwt.middleware";
 
 const router = Router();
 
-router.post("/auth/login", validate(userloginSchema), loginController);
-router.get("/auth/me", authMiddleware, meController);
+router.post("/login", validate(userloginSchema), loginController);
+router.get("/me", authMiddleware, meController);
 
 export default router;
