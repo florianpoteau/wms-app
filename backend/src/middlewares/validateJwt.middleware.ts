@@ -11,18 +11,12 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const authorizationHeader = req.header("Authorization");
-
-  if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
-    return res
-      .status(401)
-      .json({ success: false, message: "Invalid authorization header" });
-  }
-
-  const token = authorizationHeader.replace("Bearer ", "");
+  const token = req.cookies.accessToken;
 
   if (!token) {
-    return res.status(401).json({ message: "Authorization token not found" });
+    return res.status(401).json({
+      message: "token not found",
+    });
   }
 
   try {
