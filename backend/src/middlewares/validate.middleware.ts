@@ -7,6 +7,7 @@ export const validate = (schema: ZodType) => {
 
     if (!result.success) {
       return res.status(400).json({
+        message: "Données invalides",
         errors: result.error.issues,
       });
     }
