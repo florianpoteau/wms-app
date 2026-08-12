@@ -8,6 +8,7 @@ export const loginController = async (req: Request, res: Response) => {
     maxAge: 60 * 60 * 1000,
     httpOnly: true,
   });
-
-  return res.status(200).json(result);
+  return res.status(200).json({
+    message: "Connexion réussie",
+  });
 };
