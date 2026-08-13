@@ -19,3 +19,11 @@ export const getAllInactiveArticleRepository = async () => {
     },
   });
 };
+
+export const getArticleByIdRepository = async (articleId: string) => {
+  return prisma.product.findUnique({
+    where: {
+      id: articleId,
+    },
+  });
+};
