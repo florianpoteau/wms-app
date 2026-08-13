@@ -2,7 +2,7 @@ import {
   getAllActiveArticleRepository,
   getAllArticleRepository,
   getAllInactiveArticleRepository,
-} from "../../repositories/articles/getAllArticle.repository";
+} from "../../repositories/articles/getArticle.repository";
 
 export async function getAllArticleService(active?: boolean) {
   try {
