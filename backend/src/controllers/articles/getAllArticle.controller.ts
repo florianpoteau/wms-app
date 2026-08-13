@@ -3,8 +3,17 @@ import { getAllArticleService } from "../../services/articles/getAllArticle.serv
 
 export const getAllArticleController = async (req: Request, res: Response) => {
   try {
-    const articles = await getAllArticleService();
+    const { active } = req.query;
 
+    const articles = await (active === "true"
+      ? getAllArticleService(true)
+      : active === "false"
+        ? getAllArticleService(false)
+        : getAllArticleService());
+
+    if (articles.length === 0) {
+      return res.status(204).send();
+    }
     return res.status(200).json(articles);
   } catch (error) {
     if (error instanceof Error) {

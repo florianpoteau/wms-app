@@ -1,9 +1,16 @@
-import { getAllArticleRepository } from "../../repositories/articles/getAllArticle.repository";
+import {
+  getAllActiveArticleRepository,
+  getAllArticleRepository,
+  getAllInactiveArticleRepository,
+} from "../../repositories/articles/getAllArticle.repository";
 
 export async function getAllArticleService(active?: boolean) {
   try {
-    const articles = await getAllArticleRepository();
-    return articles;
+    return active === true
+      ? getAllActiveArticleRepository()
+      : active === false
+        ? getAllInactiveArticleRepository()
+        : getAllArticleRepository();
   } catch {
     throw new Error("Erreur base de données");
   }
