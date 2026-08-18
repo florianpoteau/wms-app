@@ -2,16 +2,29 @@ import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient, Roles } from "../generated/prisma/client";
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
+
 async function main() {
-  const adminpasswordHash = await bcrypt.hash("admin123", 10);
-  const managerpasswordHash = await bcrypt.hash("manager123", 10);
-  const operateurpasswordHash = await bcrypt.hash("operateur123", 10);
+  const argon2Options = {
+    type: argon2.argon2id,
+    memoryCost: 2 ** 16,
+    hashLenght: 50,
+    timeCost: 20,
+    parallelism: 5,
+  } as const;
+  const adminpasswordHash = await argon2.hash("admin123", argon2Options);
+
+  const managerpasswordHash = await argon2.hash("manager123", argon2Options);
+
+  const operateurpasswordHash = await argon2.hash(
+    "operateur123",
+    argon2Options,
+  );
   const now = new Date();
 
   // admin
