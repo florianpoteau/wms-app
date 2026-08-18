@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import type { UserloginInput } from "../../validators/auth/login.validator";
 import { findUserByEmail } from "../../repositories/users/login.repository";
@@ -12,10 +12,7 @@ export async function loginUserService(data: UserloginInput) {
     throw new Error("INVALID_CREDENTIALS");
   }
 
-  const passwordValid = await bcrypt.compare(
-    data.password,
-    user.passwordhashed,
-  );
+  const passwordValid = await argon2.verify(user.passwordhashed, data.password);
 
   if (!passwordValid) {
     throw new Error("INVALID_CREDENTIALS");
