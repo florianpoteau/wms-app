@@ -6,6 +6,7 @@ import { authMiddleware } from "../middlewares/validateJwt.middleware";
 import { getAllArticleController } from "../controllers/articles/getAllArticle.controller";
 import { getArticleByIdController } from "../controllers/articles/getArticle.controller";
 import { idSchema } from "../validators/commons/id.validator";
+import { deleteArticleController } from "../controllers/articles/deleteArticle.controller";
 
 const router = Router();
 router.post(
@@ -21,4 +22,5 @@ router.get(
   validate(idSchema),
   getArticleByIdController,
 );
+router.delete("/articles/:id", authMiddleware, deleteArticleController);
 export default router;
