@@ -1,6 +1,6 @@
 import { getArticleByIdRepository } from "../../repositories/articles/getArticle.repository";
 
-export async function getArticleByid(id: any) {
+export async function getArticleByid(id: string) {
   try {
     return await getArticleByIdRepository(id);
   } catch (error) {
