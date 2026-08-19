@@ -10,21 +10,19 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const argon2Options = {
+  const options: argon2.HashOptions = {
     type: argon2.argon2id,
     memoryCost: 2 ** 16,
-    hashLenght: 50,
-    timeCost: 20,
+    hashLength: 50,
+    timeCost: 5,
     parallelism: 5,
-  } as const;
-  const adminpasswordHash = await argon2.hash("admin123", argon2Options);
+  };
 
-  const managerpasswordHash = await argon2.hash("manager123", argon2Options);
+  const adminpasswordHash = await argon2.hash("admin123", options);
 
-  const operateurpasswordHash = await argon2.hash(
-    "operateur123",
-    argon2Options,
-  );
+  const managerpasswordHash = await argon2.hash("manager123", options);
+
+  const operateurpasswordHash = await argon2.hash("operateur123", options);
   const now = new Date();
 
   // admin
