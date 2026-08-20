@@ -22,4 +22,7 @@ export const productSchema = z.object({
   active: z.boolean().default(true),
 });
 
+export const updateProductSchema = productSchema.partial();
+
 export type ProductInput = z.infer<typeof productSchema>;
+export type UpdateProductInput = z.infer<typeof updateProductSchema>;
