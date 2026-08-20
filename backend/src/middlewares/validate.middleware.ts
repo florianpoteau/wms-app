@@ -1,11 +1,14 @@
 import type { Request, Response, NextFunction } from "express";
 import type { ZodType } from "zod";
 
-export const validate = (schema: ZodType) => {
+export const validate = (
+  schema: ZodType,
+  source: "body" | "params" = "body",
+) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const data = req.params.id ? req.params : req.body;
+    const data = source === "params" ? req.params : req.body;
+
     const result = schema.safeParse(data);
-    console.log(result);
 
     if (!result.success) {
       return res.status(400).json({
@@ -14,7 +17,9 @@ export const validate = (schema: ZodType) => {
       });
     }
 
-    req.body = result.data;
+    if (source === "body") {
+      req.body = result.data;
+    }
 
     next();
   };

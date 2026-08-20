@@ -1,8 +1,8 @@
 import { deleteArticle } from "../../repositories/articles/deleteArticle.repository";
-import { getArticleByIdRepository } from "../../repositories/articles/getArticle.repository";
+import { findArticleId } from "../../repositories/articles/findArticleId.repository";
 
 export async function deleteArticleService(articleId: string) {
-  const article = await getArticleByIdRepository(articleId);
+  const article = await findArticleId(articleId);
   if (!article) {
     throw new Error("ARTICLE_NOT_FOUND");
   }
