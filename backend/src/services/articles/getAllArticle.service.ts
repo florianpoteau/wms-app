@@ -1,16 +1,11 @@
-import {
-  getAllActiveArticleRepository,
-  getAllArticleRepository,
-  getAllInactiveArticleRepository,
-} from "../../repositories/articles/getArticle.repository";
+import { getAllArticleRepository } from "../../repositories/articles/getArticle.repository";
 
-export async function getAllArticleService(active?: boolean) {
+export async function getAllArticleService(
+  actualPage: number,
+  active?: boolean,
+) {
   try {
-    return active === true
-      ? getAllActiveArticleRepository()
-      : active === false
-        ? getAllInactiveArticleRepository()
-        : getAllArticleRepository();
+    return getAllArticleRepository(actualPage, active);
   } catch {
     throw new Error("Erreur base de données");
   }
