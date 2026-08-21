@@ -3,13 +3,16 @@ import { getAllArticleService } from "../../services/articles/getAllArticle.serv
 
 export const getAllArticleController = async (req: Request, res: Response) => {
   try {
-    const { active } = req.query;
+    const { search, limit } = req.query;
+    const page = Number(req.query.page) || 1;
+    const active =
+      req.query.active === "true"
+        ? true
+        : req.query.active === "false"
+          ? false
+          : undefined;
 
-    const articles = await (active === "true"
-      ? getAllArticleService(true)
-      : active === "false"
-        ? getAllArticleService(false)
-        : getAllArticleService());
+    const articles = await getAllArticleService(page, active);
 
     if (articles.length === 0) {
       return res.status(204).send();
