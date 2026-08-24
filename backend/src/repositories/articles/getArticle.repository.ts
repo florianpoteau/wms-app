@@ -2,12 +2,13 @@ import { prisma } from "../../lib/prisma";
 
 export const getAllArticleRepository = async (
   actualPage: number,
+  limite: number,
   active?: boolean,
 ) => {
   if (active === true || active === false) {
     return prisma.product.findMany({
-      take: 5,
-      skip: (actualPage - 1) * 5,
+      take: limite,
+      skip: (actualPage - 1) * limite,
       where: {
         active: active,
       },
@@ -17,8 +18,8 @@ export const getAllArticleRepository = async (
     });
   } else {
     return prisma.product.findMany({
-      take: 5,
-      skip: (actualPage - 1) * 5,
+      take: limite,
+      skip: (actualPage - 1) * limite,
       orderBy: {
         name: "asc",
       },
