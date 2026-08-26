@@ -18,11 +18,11 @@ async function seedUsers() {
     parallelism: 5,
   };
 
-  const adminpasswordHash = await argon2.hash("admin123", options);
+  const adminpasswordHash = await argon2.hash("admin123!", options);
 
-  const managerpasswordHash = await argon2.hash("manager123", options);
+  const managerpasswordHash = await argon2.hash("manager123!", options);
 
-  const operateurpasswordHash = await argon2.hash("operateur123", options);
+  const operateurpasswordHash = await argon2.hash("operateur123!", options);
   const now = new Date();
 
   // admin
