@@ -13,8 +13,12 @@ import { deleteArticleController } from "../controllers/articles/deleteArticle.c
 import { updateArticleController } from "../controllers/articles/updateArticle.controller";
 import { permit } from "../middlewares/permit.middleware";
 import { Roles } from "../../generated/prisma/enums";
+import { supplierSchema } from "../validators/suppliers/supplier.validator";
+import { createSupplierController } from "../controllers/suppliers/createSupplier.controller";
 
 const router = Router();
+
+// articles
 router.post(
   "/articles",
   authMiddleware,
@@ -42,5 +46,14 @@ router.delete(
   authMiddleware,
   permit(Roles.MANAGER, Roles.ADMIN),
   deleteArticleController,
+);
+
+// Fournisseurs
+router.post(
+  "/suppliers",
+  authMiddleware,
+  permit(Roles.MANAGER, Roles.ADMIN),
+  validate(supplierSchema, "body"),
+  createSupplierController,
 );
 export default router;
