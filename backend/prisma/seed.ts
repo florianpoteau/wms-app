@@ -1,13 +1,20 @@
 import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient, Roles } from "../generated/prisma/client";
+import {
+  PrismaClient,
+  Roles,
+  type Product,
+  type Supplier,
+} from "../generated/prisma/client";
 import argon2 from "argon2";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
+
+// USERS
 
 async function seedUsers() {
   const options: argon2.HashOptions = {
@@ -70,13 +77,12 @@ async function seedUsers() {
     },
   });
 }
+
+// PRODUITS
+
 async function seedProduct() {
-  await prisma.product.upsert({
-    where: {
-      reference: "CLAVIER-001",
-    },
-    update: {},
-    create: {
+  const products = [
+    {
       reference: "CLAVIER-001",
       name: "Clavier mécanique",
       description: "Clavier mécanique USB AZERTY",
@@ -85,14 +91,7 @@ async function seedProduct() {
       minimumStock: 10,
       active: true,
     },
-  });
-
-  await prisma.product.upsert({
-    where: {
-      reference: "SOURIS-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "SOURIS-001",
       name: "Souris sans fil",
       description: "Souris sans fil Bluetooth avec capteur optique",
@@ -101,13 +100,7 @@ async function seedProduct() {
       minimumStock: 15,
       active: true,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "ECRAN-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "ECRAN-001",
       name: "Écran 24 pouces",
       description: "Écran LED Full HD 24 pouces",
@@ -116,13 +109,7 @@ async function seedProduct() {
       minimumStock: 5,
       active: false,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "ECRAN-002",
-    },
-    update: {},
-    create: {
+    {
       reference: "ECRAN-002",
       name: "Écran 27 pouces",
       description: "Écran LED 27 pouces résolution 2560x1440",
@@ -131,13 +118,7 @@ async function seedProduct() {
       minimumStock: 5,
       active: true,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "CABLE-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "CABLE-001",
       name: "Câble HDMI",
       description: "Câble HDMI haute vitesse de 2 mètres",
@@ -146,13 +127,7 @@ async function seedProduct() {
       minimumStock: 20,
       active: false,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "CABLE-002",
-    },
-    update: {},
-    create: {
+    {
       reference: "CABLE-002",
       name: "Câble USB-C",
       description: "Câble USB-C vers USB-C de 1 mètre",
@@ -161,13 +136,7 @@ async function seedProduct() {
       minimumStock: 25,
       active: false,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "CASQUE-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "CASQUE-001",
       name: "Casque audio",
       description: "Casque audio filaire avec microphone intégré",
@@ -176,13 +145,7 @@ async function seedProduct() {
       minimumStock: 10,
       active: true,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "WEBCAM-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "WEBCAM-001",
       name: "Webcam Full HD",
       description: "Webcam USB Full HD 1080p avec microphone",
@@ -191,13 +154,7 @@ async function seedProduct() {
       minimumStock: 8,
       active: true,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "HUB-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "HUB-001",
       name: "Hub USB",
       description: "Hub USB 3.0 avec quatre ports",
@@ -206,13 +163,7 @@ async function seedProduct() {
       minimumStock: 10,
       active: false,
     },
-  });
-  await prisma.product.upsert({
-    where: {
-      reference: "CHARGEUR-001",
-    },
-    update: {},
-    create: {
+    {
       reference: "CHARGEUR-001",
       name: "Chargeur USB-C",
       description: "Chargeur secteur USB-C 65W",
@@ -221,12 +172,111 @@ async function seedProduct() {
       minimumStock: 12,
       active: true,
     },
+  ];
+
+  const createdProducts: Product[] = [];
+
+  for (const product of products) {
+    const result = await prisma.product.upsert({
+      where: {
+        reference: product.reference,
+      },
+      update: {},
+      create: product,
+    });
+
+    createdProducts.push(result);
+  }
+
+  return createdProducts;
+}
+
+// FOURNISSEURS
+
+async function seedSupplier() {
+  const suppliers: Supplier[] = [];
+  const supplier1 = await prisma.supplier.upsert({
+    where: { email: "contact@techdistrib.fr", phone: "01 45 67 89 10" },
+    create: {
+      name: "TechDistrib",
+      email: "contact@techdistrib.fr",
+      phone: "01 45 67 89 10",
+      address: "24 rue des Entrepreneurs",
+      city: "Paris",
+      country: "France",
+      postalCode: "75015",
+    },
+    update: {},
+  });
+  const supplier2 = await prisma.supplier.upsert({
+    where: { email: "acme@example.com", phone: "03 11 11 11 11" },
+    create: {
+      name: "acme",
+      email: "acme@example.com",
+      phone: "03 11 11 11 11",
+      address: "10 rue de Paris",
+      city: "Paris",
+      country: "France",
+      postalCode: "75015",
+    },
+    update: {},
+  });
+  const supplier3 = await prisma.supplier.upsert({
+    where: { email: "contact@techdistribution.fr", phone: "045678910" },
+    create: {
+      name: "TechDistribution",
+      email: "contact@techdistribution.fr",
+      phone: "045678910",
+      address: "24 rue des Entrepreneurs",
+      city: "Paris",
+      country: "France",
+      postalCode: "75015",
+    },
+    update: {},
+  });
+  suppliers.push(supplier1, supplier2, supplier3);
+  return suppliers;
+}
+
+// PRODUITS + FOURNISSEURS
+
+async function seedProductSupplier(products: Product[], suppliers: Supplier[]) {
+  await prisma.productSupplier.createMany({
+    data: [
+      {
+        productId: products[0]!.id,
+        supplierId: suppliers[0]!.id,
+      },
+      {
+        productId: products[1]!.id,
+        supplierId: suppliers[0]!.id,
+      },
+      {
+        productId: products[6]!.id,
+        supplierId: suppliers[1]!.id,
+      },
+      {
+        productId: products[4]!.id,
+        supplierId: suppliers[2]!.id,
+      },
+      {
+        productId: products[1]!.id,
+        supplierId: suppliers[2]!.id,
+      },
+      {
+        productId: products[8]!.id,
+        supplierId: suppliers[1]!.id,
+      },
+    ],
+    skipDuplicates: true,
   });
 }
 
 async function main() {
-  seedUsers();
-  seedProduct();
+  await seedUsers();
+  const products = await seedProduct();
+  const suppliers = await seedSupplier();
+  await seedProductSupplier(products, suppliers);
 }
 
 main()
