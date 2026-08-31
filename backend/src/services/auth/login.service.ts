@@ -9,6 +9,7 @@ export async function loginUserService(data: UserloginInput) {
   const jwtSecret = process.env.JWT_SECRET;
 
   if (!user) {
+    await new Promise((resolve) => setTimeout(resolve, 80));
     throw new Error("INVALID_CREDENTIALS");
   }
 
