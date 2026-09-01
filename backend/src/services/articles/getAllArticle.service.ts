@@ -6,7 +6,9 @@ export async function getAllArticleService(
   active?: boolean,
   search?: string,
 ) {
-  try {
+  if (limite > 20 || limite < 1) {
+    throw new Error("Limite doit être comprise entre 1 et 20");
+  } else {
     const { products, totalProducts } = await getAllArticleRepository(
       actualPage,
       limite,
@@ -25,7 +27,5 @@ export async function getAllArticleService(
         totalProducts,
       },
     };
-  } catch {
-    throw new Error("Erreur base de données");
   }
 }
