@@ -19,11 +19,13 @@ export const getAllArticleRepository = async (
                   {
                     name: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                   {
                     reference: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                 ],
@@ -53,11 +55,13 @@ export const getAllArticleRepository = async (
                   {
                     name: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                   {
                     reference: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                 ],

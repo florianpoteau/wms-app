@@ -4,9 +4,7 @@ import { createSupplierService } from "../../services/supplier/createSupplier.se
 export const createSupplierController = async (req: Request, res: Response) => {
   try {
     await createSupplierService(req.body);
-    return res.status(201).json({
-      message: "Le fournisseur a été créé avec succès",
-    });
+    return res.status(201).send();
   } catch (error) {
     if (error instanceof Error) {
       return res.status(400).json({
