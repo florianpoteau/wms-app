@@ -10,18 +10,16 @@ export const updateArticleController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof Error && error.message === "ARTICLE_NOT_FOUND") {
-      return res.status(404).json({
-        message: "Article introuvable",
-      });
+      return res.status(404).send();
     }
     if (error instanceof Error && error.message === "REFERENCE_ALREADY_EXIST") {
       return res.status(409).json({
-        message: "Cette référence est déjà utilisé",
+        message: "This reference already exists",
       });
     }
     if (error instanceof Error && error.message === "BARCODE_ALREADY_EXIST") {
       return res.status(409).json({
-        message: "Ce barcode est déjà utilisé",
+        message: "This barcode is already in use",
       });
     }
     return res.status(500).json({

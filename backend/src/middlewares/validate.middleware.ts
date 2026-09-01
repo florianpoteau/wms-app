@@ -11,12 +11,7 @@ export const validate = (
     const result = schema.safeParse(data);
 
     if (!result.success) {
-      console.log(req);
-
-      return res.status(400).json({
-        message: "Données invalides",
-        errors: result.error.issues,
-      });
+      return res.status(400).send();
     }
 
     if (source === "body") {

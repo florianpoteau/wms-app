@@ -6,9 +6,7 @@ export const meController = async (req: AuthRequest, res: Response) => {
   const user = await meService(req.token.userId);
 
   if (!user) {
-    return res.status(404).json({
-      message: "User not found",
-    });
+    return res.status(404).send();
   }
 
   return res.status(200).json({
