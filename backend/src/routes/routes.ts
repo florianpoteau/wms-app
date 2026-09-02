@@ -5,6 +5,7 @@ import {
   productSchema,
   updateProductSchema,
 } from "../validators/articles/article.validator";
+import { getAllArticleSchema } from "../validators/articles/getAllArticle.validator";
 import { authMiddleware } from "../middlewares/validateJwt.middleware";
 import { getAllArticleController } from "../controllers/articles/getAllArticle.controller";
 import { getArticleByIdController } from "../controllers/articles/getArticle.controller";
@@ -26,7 +27,12 @@ router.post(
   validate(productSchema),
   createArticleController,
 );
-router.get("/articles", authMiddleware, getAllArticleController);
+router.get(
+  "/articles",
+  authMiddleware,
+  validate(getAllArticleSchema, "query"),
+  getAllArticleController,
+);
 router.get(
   "/articles/:id",
   authMiddleware,
