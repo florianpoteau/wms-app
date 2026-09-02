@@ -15,11 +15,13 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
                   {
                     name: {
                       contains: data.search,
+                      mode: "insensitive",
                     },
                   },
                   {
                     reference: {
                       contains: data.search,
+                      mode: "insensitive",
                     },
                   },
                 ],
@@ -49,11 +51,13 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
                   {
                     name: {
                       contains: data.search,
+                      mode: "insensitive",
                     },
                   },
                   {
                     reference: {
                       contains: data.search,
+                      mode: "insensitive",
                     },
                   },
                 ],
