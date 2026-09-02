@@ -38,7 +38,6 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
     ]);
     return { products, totalProducts };
   } else {
-    console.log(typeof data.limit);
     const [products, totalProducts] = await prisma.$transaction([
       prisma.product.findMany({
         take: data.limit,

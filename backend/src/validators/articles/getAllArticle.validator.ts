@@ -4,7 +4,6 @@ export const getAllArticleSchema = z.object({
   search: z
     .string()
     .max(50, "La recherche ne peux pas dépasser 50 caractères")
-    .transform((value) => value.toUpperCase())
     .optional(),
 
   page: z.coerce.number().min(1, "La page doit être supérieur à 0"),

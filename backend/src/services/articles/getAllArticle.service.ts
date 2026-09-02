@@ -1,21 +1,18 @@
 import { getAllArticleRepository } from "../../repositories/articles/getArticle.repository";
+import type { AllProductInput } from "../../validators/articles/getAllArticle.validator";
 
-export async function getAllArticleService(data: any) {
-  const formattedData = {
-    ...data,
-    page: Number(data.page),
-    limit: Number(data.limit),
-  };
-  const { products, totalProducts } =
-    await getAllArticleRepository(formattedData);
+export async function getAllArticleService(data: AllProductInput) {
+  console.log(data);
 
-  const totalPages = Math.ceil(totalProducts / formattedData.limit);
+  const { products, totalProducts } = await getAllArticleRepository(data);
+
+  const totalPages = Math.ceil(totalProducts / data.limit);
 
   return {
     products,
     pagination: {
-      page: formattedData.page,
-      limit: formattedData.limit,
+      page: data.page,
+      limit: data.limit,
       totalPages,
       totalProducts,
     },
