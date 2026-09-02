@@ -1,31 +1,25 @@
 import { prisma } from "../../lib/prisma";
+import type { AllProductInput } from "../../validators/articles/getAllArticle.validator";
 
-export const getAllArticleRepository = async (
-  actualPage: number,
-  limite: number,
-  active?: boolean,
-  search?: string,
-) => {
-  if (active === true || active === false) {
+export const getAllArticleRepository = async (data: AllProductInput) => {
+  if (data.active === true || data.active === false) {
     const [products, totalProducts] = await prisma.$transaction([
       prisma.product.findMany({
-        take: limite,
-        skip: (actualPage - 1) * limite,
+        take: data.limit,
+        skip: (data.page - 1) * data.limit,
         where: {
-          active: active,
-          ...(search
+          active: data.active,
+          ...(data.search
             ? {
                 OR: [
                   {
                     name: {
-                      contains: search,
-                      mode: "insensitive",
+                      contains: data.search,
                     },
                   },
                   {
                     reference: {
-                      contains: search,
-                      mode: "insensitive",
+                      contains: data.search,
                     },
                   },
                 ],
@@ -38,30 +32,29 @@ export const getAllArticleRepository = async (
       }),
       prisma.product.count({
         where: {
-          active: active,
+          active: data.active,
         },
       }),
     ]);
     return { products, totalProducts };
   } else {
+    console.log(typeof data.limit);
     const [products, totalProducts] = await prisma.$transaction([
       prisma.product.findMany({
-        take: limite,
-        skip: (actualPage - 1) * limite,
+        take: data.limit,
+        skip: (data.page - 1) * data.limit,
         where: {
-          ...(search
+          ...(data.search
             ? {
                 OR: [
                   {
                     name: {
-                      contains: search,
-                      mode: "insensitive",
+                      contains: data.search,
                     },
                   },
                   {
                     reference: {
-                      contains: search,
-                      mode: "insensitive",
+                      contains: data.search,
                     },
                   },
                 ],
