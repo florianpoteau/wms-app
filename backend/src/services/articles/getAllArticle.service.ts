@@ -1,31 +1,23 @@
 import { getAllArticleRepository } from "../../repositories/articles/getArticle.repository";
 
-export async function getAllArticleService(
-  actualPage: number,
-  limite: number,
-  active?: boolean,
-  search?: string,
-) {
-  if (limite > 20 || limite < 1) {
-    throw new Error("Limite doit être comprise entre 1 et 20");
-  } else {
-    const { products, totalProducts } = await getAllArticleRepository(
-      actualPage,
-      limite,
-      active,
-      search,
-    );
+export async function getAllArticleService(data: any) {
+  const formattedData = {
+    ...data,
+    page: Number(data.page),
+    limit: Number(data.limit),
+  };
+  const { products, totalProducts } =
+    await getAllArticleRepository(formattedData);
 
-    const totalPages = Math.ceil(totalProducts / limite);
+  const totalPages = Math.ceil(totalProducts / formattedData.limit);
 
-    return {
-      products,
-      pagination: {
-        page: actualPage,
-        limit: limite,
-        totalPages,
-        totalProducts,
-      },
-    };
-  }
+  return {
+    products,
+    pagination: {
+      page: formattedData.page,
+      limit: formattedData.limit,
+      totalPages,
+      totalProducts,
+    },
+  };
 }
