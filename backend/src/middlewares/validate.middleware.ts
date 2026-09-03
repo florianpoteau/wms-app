@@ -16,11 +16,7 @@ export const validate = (
     const result = schema.safeParse(data);
 
     if (!result.success) {
-      return res.status(400).send();
-    }
-
-    if (source === "body") {
-      req.body = result.data;
+      return res.status(400).json(result.error.issues);
     }
 
     next();
