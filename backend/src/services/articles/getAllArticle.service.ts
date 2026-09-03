@@ -1,31 +1,20 @@
 import { getAllArticleRepository } from "../../repositories/articles/getArticle.repository";
+import type { AllProductInput } from "../../validators/articles/getAllArticle.validator";
 
-export async function getAllArticleService(
-  actualPage: number,
-  limite: number,
-  active?: boolean,
-  search?: string,
-) {
-  try {
-    const { products, totalProducts } = await getAllArticleRepository(
-      actualPage,
-      limite,
-      active,
-      search,
-    );
+export async function getAllArticleService(data: AllProductInput) {
+  console.log(data);
 
-    const totalPages = Math.ceil(totalProducts / limite);
+  const { products, totalProducts } = await getAllArticleRepository(data);
 
-    return {
-      products,
-      pagination: {
-        page: actualPage,
-        limit: limite,
-        totalPages,
-        totalProducts,
-      },
-    };
-  } catch {
-    throw new Error("Erreur base de données");
-  }
+  const totalPages = Math.ceil(totalProducts / data.limit);
+
+  return {
+    products,
+    pagination: {
+      page: data.page,
+      limit: data.limit,
+      totalPages,
+      totalProducts,
+    },
+  };
 }
