@@ -10,10 +10,10 @@ export async function createSupplierService(data: SupplierInput) {
   const existingPhone = await findSupplierByPhoneRepository(data.phone);
 
   if (existingEmail) {
-    throw new Error("Cette email est déjà utilisé");
+    throw new Error("EMAIL_ALREADY_EXISTS");
   }
   if (existingPhone) {
-    throw new Error("Ce numéro de téléphone est déjà utilisé");
+    throw new Error("PHONE_ALREADY_EXISTS");
   }
 
   const supplier = await createSupplierRepository(data);

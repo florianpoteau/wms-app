@@ -20,7 +20,7 @@ export async function loginUserService(data: UserloginInput) {
   }
 
   if (!jwtSecret) {
-    throw new Error("JWT_SECRET is not defined");
+    throw new Error("JWT_NOT-DEFINED");
   }
 
   const token = jwt.sign(
