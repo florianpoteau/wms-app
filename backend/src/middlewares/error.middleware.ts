@@ -14,6 +14,6 @@ export const errorHandling = (
   }
 
   return res.status(500).json({
-    message: "Une erreur est survenue.",
+    message: "An error occurred",
   });
 };

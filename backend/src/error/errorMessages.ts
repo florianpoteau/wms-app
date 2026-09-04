@@ -1,34 +1,34 @@
 export const ERROR = {
   ARTICLE_NOT_FOUND: {
     statusCode: 404,
-    message: "Article introuvable",
+    message: "Article not found",
   },
   REFERENCE_ALREADY_EXISTS: {
     statusCode: 409,
-    message: "Cette référence existe déjà",
+    message: "This reference already exists",
   },
   BARCODE_ALREADY_EXISTS: {
     statusCode: 409,
-    message: "Ce code-barres existe déjà",
+    message: "This barcode already exists",
   },
   USER_NOT_FOUND: {
     statusCode: 404,
-    message: "Utilisateur introuvable",
+    message: "User not found",
   },
   INVALID_CREDENTIALS: {
     statusCode: 401,
-    message: "Identifiants invalides",
+    message: "Invalid identifiers",
   },
   JWT_NOT_DEFINED: {
     statusCode: 401,
-    message: "Session expirée. Veuillez vous reconnectez",
+    message: "Session expired. Please log in again",
   },
   EMAIL_ALREADY_EXISTS: {
     statusCode: 409,
-    message: "Cet email existe déjà",
+    message: "this email already in use",
   },
   PHONE_ALREADY_EXISTS: {
     statusCode: 409,
-    message: "Ce numéro de téléphone est déjà utilisé",
+    message: "this phone number is already in use",
   },
 };

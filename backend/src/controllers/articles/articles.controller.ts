@@ -13,11 +13,7 @@ export default class ArticleController {
       return res.status(400).json(result.error.issues);
     } else {
       const articles = await getAllArticleService(result.data);
-      if (articles.products.length === 0) {
-        return res.status(204).send();
-      } else {
-        return res.status(200).json(articles);
-      }
+      return res.status(200).json(articles);
     }
   };
 
