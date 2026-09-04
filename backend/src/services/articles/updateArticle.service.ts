@@ -1,4 +1,6 @@
 import type { ProductUpdateInput } from "../../../generated/prisma/models";
+import AppError from "../../error/AppError.middleware";
+import { ERROR } from "../../error/errorMessages";
 import {
   findArticleByBarcode,
   findArticleByReference,
@@ -13,14 +15,14 @@ export async function updateArticleService(
 ) {
   const articleId = await findArticleId(id);
   if (!articleId) {
-    throw new Error("ARTICLE_NOT_FOUND");
+    throw new AppError(ERROR.ARTICLE_NOT_FOUND);
   }
 
   if (data.reference !== undefined) {
     const existingReference = await findArticleByReference(data.reference);
 
     if (existingReference && existingReference.id !== id) {
-      throw new Error("REFERENCE_ALREADY_EXIST");
+      throw new AppError(ERROR.REFERENCE_ALREADY_EXISTS);
     }
   }
 
@@ -28,7 +30,7 @@ export async function updateArticleService(
     const existingbarcode = await findArticleByBarcode(data.barcode);
 
     if (existingbarcode && existingbarcode.id !== id) {
-      throw new Error("BARCODE_ALREADY_EXIST");
+      throw new AppError(ERROR.BARCODE_ALREADY_EXISTS);
     }
   }
 

@@ -2,8 +2,6 @@ import { getAllArticleRepository } from "../../repositories/articles/getArticle.
 import type { AllProductInput } from "../../validators/articles/getAllArticle.validator";
 
 export async function getAllArticleService(data: AllProductInput) {
-  console.log(data);
-
   const { products, totalProducts } = await getAllArticleRepository(data);
 
   const totalPages = Math.ceil(totalProducts / data.limit);
