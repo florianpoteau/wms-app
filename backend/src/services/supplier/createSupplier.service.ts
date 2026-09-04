@@ -1,3 +1,5 @@
+import AppError from "../../error/AppError.middleware";
+import { ERROR } from "../../error/errorMessages";
 import { createSupplierRepository } from "../../repositories/supplier/createSupplierRepository";
 import {
   findSupplierByEmailRepository,
@@ -10,10 +12,10 @@ export async function createSupplierService(data: SupplierInput) {
   const existingPhone = await findSupplierByPhoneRepository(data.phone);
 
   if (existingEmail) {
-    throw new Error("Cette email est déjà utilisé");
+    throw new AppError(ERROR.EMAIL_ALREADY_EXISTS);
   }
   if (existingPhone) {
-    throw new Error("Ce numéro de téléphone est déjà utilisé");
+    throw new AppError(ERROR.PHONE_ALREADY_EXISTS);
   }
 
   const supplier = await createSupplierRepository(data);
