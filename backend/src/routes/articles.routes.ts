@@ -9,6 +9,7 @@ import { idSchema } from "../validators/commons/id.validator";
 import { permit } from "../middlewares/permit.middleware";
 import { Roles } from "../../generated/prisma/enums";
 import ArticleController from "../controllers/articles/articles.controller";
+import { updateArticleRequestSchema } from "../validators/articles/updateArticleRequest.validator";
 
 const router = Router();
 
@@ -20,24 +21,24 @@ router.post(
 );
 router.get(
   "/articles",
-  validate(getAllArticleSchema, "query"),
+  validate(getAllArticleSchema),
   ArticleController.getAllArticleController,
 );
 router.get(
   "/articles/:id",
-  validate(idSchema, "params"),
+  validate(idSchema),
   ArticleController.getArticleByIdController,
 );
 router.patch(
   "/articles/:id",
   permit(Roles.MANAGER, Roles.ADMIN),
-  validate(idSchema, "params"),
-  validate(updateProductSchema),
+  validate(updateArticleRequestSchema),
   ArticleController.updateArticleController,
 );
 router.delete(
   "/articles/:id",
   permit(Roles.MANAGER, Roles.ADMIN),
+  validate(idSchema),
   ArticleController.deleteArticleController,
 );
 export default router;

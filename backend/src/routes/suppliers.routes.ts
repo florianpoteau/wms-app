@@ -9,7 +9,7 @@ const router = Router();
 router.post(
   "/suppliers",
   permit(Roles.MANAGER, Roles.ADMIN),
-  validate(supplierSchema, "body"),
+  validate(supplierSchema),
   createSupplierController,
 );
 
