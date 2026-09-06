@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const productSchema = z.object({
+const productSchemaBody = z.object({
   reference: z
     .string()
     .min(1, "La référence est obligatoire")
@@ -22,7 +22,11 @@ export const productSchema = z.object({
   active: z.boolean().default(true),
 });
 
+export const productSchema = z.object({
+  body: productSchemaBody,
+});
+
 export const updateProductSchema = productSchema.partial();
 
-export type ProductInput = z.infer<typeof productSchema>;
+export type ProductInput = z.infer<typeof productSchemaBody>;
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;

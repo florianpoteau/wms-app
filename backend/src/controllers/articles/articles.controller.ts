@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import { getAllArticleSchema } from "../../validators/articles/getAllArticle.validator";
 import { getAllArticleService } from "../../services/articles/getAllArticle.service";
 import { createArticleService } from "../../services/articles/createArticle.service";
 import { getArticleByid } from "../../services/articles/getArticle.service";
@@ -8,36 +7,34 @@ import { deleteArticleService } from "../../services/articles/deleteArticle.serv
 
 export default class ArticleController {
   static getAllArticleController = async (req: Request, res: Response) => {
-    const result = getAllArticleSchema.safeParse(req.query);
-    if (!result.success) {
-      return res.status(400).json(result.error.issues);
-    } else {
-      const articles = await getAllArticleService(result.data);
-      return res.status(200).json(articles);
-    }
+    const data = res.locals.validated.query;
+    const articles = await getAllArticleService(data);
+    return res.status(200).json(articles);
   };
 
   static getArticleByIdController = async (req: Request, res: Response) => {
-    const articleId = req.params.id as string;
-    const article = await getArticleByid(articleId);
+    const data = res.locals.validated.params;
+    const article = await getArticleByid(data.id);
     return res.status(200).json(article);
   };
 
   static createArticleController = async (req: Request, res: Response) => {
-    const result = await createArticleService(req.body);
+    const data = res.locals.validated.body;
+    const result = await createArticleService(data);
     return res.status(201).json(result);
   };
 
   static updateArticleController = async (req: Request, res: Response) => {
-    const articleId = req.params.id as string;
-    const article = await updateArticleService(articleId, req.body);
+    const data = res.locals.validated;
+    const article = await updateArticleService(data.params.id, data.body);
 
     return res.status(200).json(article);
   };
 
   static deleteArticleController = async (req: Request, res: Response) => {
-    const articleId = req.params.id as string;
-    await deleteArticleService(articleId);
+    const data = res.locals.validated.params;
+
+    await deleteArticleService(data.id);
     return res.status(200).send();
   };
 }

@@ -7,12 +7,9 @@ import {
 } from "../../repositories/articles/findArticle.repository";
 import { findArticleId } from "../../repositories/articles/findArticleId.repository";
 import { updateArticle } from "../../repositories/articles/updateArticle.repository";
-import type { UpdateProductInput } from "../../validators/articles/article.validator";
+import type { ProductInput } from "../../validators/articles/article.validator";
 
-export async function updateArticleService(
-  id: string,
-  data: UpdateProductInput,
-) {
+export async function updateArticleService(id: string, data: ProductInput) {
   const articleId = await findArticleId(id);
   if (!articleId) {
     throw new AppError(ERROR.ARTICLE_NOT_FOUND);
