@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const getAllArticleSchema = z.object({
+const getAllArticleQuerySchema = z.object({
   search: z
     .string()
     .max(50, "La recherche ne peux pas dépasser 50 caractères")
@@ -10,7 +10,7 @@ export const getAllArticleSchema = z.object({
   limit: z.coerce
     .number()
     .int()
-    .min(1, "La limite doit être supérieur a 0")
+    .min(1, "La limite doit être supérieure a 0")
     .max(20, "La limite ne doit pas dépassser 20 caractères"),
   active: z
     .enum(["true", "false"])
@@ -18,4 +18,8 @@ export const getAllArticleSchema = z.object({
     .optional(),
 });
 
-export type AllProductInput = z.infer<typeof getAllArticleSchema>;
+export const getAllArticleSchema = z.object({
+  query: getAllArticleQuerySchema,
+});
+
+export type AllProductInput = z.infer<typeof getAllArticleQuerySchema>;
