@@ -5,6 +5,7 @@ import { findArticleId } from "../../repositories/articles/findArticleId.reposit
 
 export async function deleteArticleService(articleId: string) {
   const article = await findArticleId(articleId);
+
   if (!article) {
     throw new AppError(ERROR.ARTICLE_NOT_FOUND);
   }
