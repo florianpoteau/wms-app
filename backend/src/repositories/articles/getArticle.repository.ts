@@ -31,6 +31,9 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
         orderBy: {
           name: "asc",
         },
+        include: {
+          productSuppliers: true,
+        },
       }),
       prisma.product.count({
         where: {
@@ -66,6 +69,9 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
         },
         orderBy: {
           name: "asc",
+        },
+        include: {
+          productSuppliers: true,
         },
       }),
       prisma.product.count(),
