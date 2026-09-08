@@ -1,4 +1,3 @@
-import type { ProductUpdateInput } from "../../../generated/prisma/models";
 import AppError from "../../error/AppError.middleware";
 import { ERROR } from "../../error/errorMessages";
 import {
@@ -7,7 +6,10 @@ import {
 } from "../../repositories/articles/findArticle.repository";
 import { findArticleId } from "../../repositories/articles/findArticleId.repository";
 import { updateArticle } from "../../repositories/articles/updateArticle.repository";
-import type { ProductInput } from "../../validators/articles/article.validator";
+import type {
+  ProductInput,
+  UpdateProductInput,
+} from "../../validators/articles/article.validator";
 
 export async function updateArticleService(id: string, data: ProductInput) {
   const articleId = await findArticleId(id);
@@ -31,5 +33,5 @@ export async function updateArticleService(id: string, data: ProductInput) {
     }
   }
 
-  return await updateArticle(id, data as ProductUpdateInput);
+  return await updateArticle(id, data as UpdateProductInput);
 }

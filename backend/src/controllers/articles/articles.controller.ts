@@ -26,9 +26,9 @@ export default class ArticleController {
 
   static updateArticleController = async (req: Request, res: Response) => {
     const data = res.locals.validated;
-    const article = await updateArticleService(data.params.id, data.body);
+    await updateArticleService(data.params.id, data.body);
 
-    return res.status(200).json(article);
+    return res.status(200).send();
   };
 
   static deleteArticleController = async (req: Request, res: Response) => {

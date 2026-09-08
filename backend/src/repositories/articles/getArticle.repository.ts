@@ -85,5 +85,8 @@ export const getArticleByIdRepository = async (articleId: string) => {
     where: {
       id: articleId,
     },
+    include: {
+      productSuppliers: true,
+    },
   });
 };
