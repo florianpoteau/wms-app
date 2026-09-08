@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const supplierSchema = z.object({
+export const supplierSchemaBody = z.object({
   name: z
     .string()
     .min(1, "Le nom est obligatoire")
@@ -25,4 +25,9 @@ export const supplierSchema = z.object({
     .min(1, "La ville est obligatoire")
     .max(30, "La ville ne peut pas dépasser 30 caractères"),
 });
-export type SupplierInput = z.infer<typeof supplierSchema>;
+
+export const supplierSchema = z.object({
+  body: supplierSchemaBody,
+});
+
+export type SupplierInput = z.infer<typeof supplierSchemaBody>;
