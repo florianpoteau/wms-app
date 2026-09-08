@@ -31,6 +31,15 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
         orderBy: {
           name: "asc",
         },
+        select: {
+          reference: true,
+          name: true,
+          description: true,
+          barcode: true,
+          unit: true,
+          minimumStock: true,
+          active: true,
+        },
       }),
       prisma.product.count({
         where: {
@@ -67,6 +76,15 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
         orderBy: {
           name: "asc",
         },
+        select: {
+          reference: true,
+          name: true,
+          description: true,
+          barcode: true,
+          unit: true,
+          minimumStock: true,
+          active: true,
+        },
       }),
       prisma.product.count(),
     ]);
@@ -78,6 +96,17 @@ export const getArticleByIdRepository = async (articleId: string) => {
   return prisma.product.findUnique({
     where: {
       id: articleId,
+    },
+    include: {
+      productSuppliers: {
+        omit: {
+          productId: true,
+          supplierId: true,
+        },
+        include: {
+          Supplier: true,
+        },
+      },
     },
   });
 };

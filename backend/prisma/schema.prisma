@@ -72,8 +72,8 @@ model Product {
 model ProductSupplier {
   productId String @db.Uuid
   supplierId String @db.Uuid
-  product Product @relation(fields: [productId], references: [id])
-  Supplier Supplier @relation(fields: [supplierId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  Supplier Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
 
   @@id([productId, supplierId])
 }

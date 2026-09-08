@@ -1,8 +1,20 @@
-import type { ProductCreateInput } from "../../../generated/prisma/models/Product";
+import type { ProductInput } from "../../validators/articles/article.validator";
 import { prisma } from "../../lib/prisma";
 
-export const createArticle = async (data: ProductCreateInput) => {
+export const createArticle = async (data: ProductInput) => {
+  const { productSupplier, ...productData } = data;
   return prisma.product.create({
-    data,
+    data: {
+      ...productData,
+      productSuppliers: {
+        createMany: {
+          data: productSupplier.map((supplierId) => {
+            return {
+              supplierId,
+            };
+          }),
+        },
+      },
+    },
   });
 };

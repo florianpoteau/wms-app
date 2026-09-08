@@ -18,8 +18,5 @@ export async function createArticleService(data: ProductInput) {
       throw new AppError(ERROR.BARCODE_ALREADY_EXISTS);
     }
   }
-  const article = await createArticle(data);
-  return {
-    article,
-  };
+  return createArticle(data);
 }
