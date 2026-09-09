@@ -1,6 +1,7 @@
 import AppError from "../../error/AppError.middleware";
 import { ERROR } from "../../error/errorMessages";
-import { findSupplierIdRepository } from "../../repositories/supplier/findSupplierId.repository";
+import { findSupplierIdRepository } from "../../repositories/supplier/findSupplierRepository";
+
 import { getSupplierByIdRepository } from "../../repositories/supplier/getSupplier.repository";
 
 export async function getSupplierByIdService(id: string) {
