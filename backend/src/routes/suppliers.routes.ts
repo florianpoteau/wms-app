@@ -31,5 +31,11 @@ router.patch(
   validate(updateSupplierRequestSchema),
   SupplierController.updateSupplierByIdController,
 );
+router.delete(
+  "/suppliers/:id",
+  permit(Roles.ADMIN, Roles.MANAGER),
+  validate(idSchema),
+  SupplierController.deleteSupplierController,
+);
 
 export default router;

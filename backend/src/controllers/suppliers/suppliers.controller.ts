@@ -3,6 +3,7 @@ import { createSupplierService } from "../../services/supplier/createSupplier.se
 import { getAllSupplierService } from "../../services/supplier/getAllSupplier.service";
 import { getSupplierByIdService } from "../../services/supplier/getSupplier.service";
 import { updateSupplierService } from "../../services/supplier/updateSupplier.service";
+import { deleteSupplierService } from "../../services/supplier/deleteSupplier.service";
 
 export default class SupplierController {
   static getAllSupplierController = async (req: Request, res: Response) => {
@@ -25,9 +26,14 @@ export default class SupplierController {
 
   static updateSupplierByIdController = async (req: Request, res: Response) => {
     const data = res.locals.validated;
-    console.log(data);
 
     await updateSupplierService(data.params.id, data.body);
+    return res.status(200).send();
+  };
+
+  static deleteSupplierController = async (req: Request, res: Response) => {
+    const data = res.locals.validated.params;
+    await deleteSupplierService(data.id);
     return res.status(200).send();
   };
 }
