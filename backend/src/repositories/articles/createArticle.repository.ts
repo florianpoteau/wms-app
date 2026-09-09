@@ -16,5 +16,8 @@ export const createArticle = async (data: ProductInput) => {
         },
       },
     },
+    omit: {
+      deletedAt: true,
+    },
   });
 };
