@@ -11,3 +11,11 @@ export const findSupplierByEmailRepository = async (email: string) => {
     where: { email },
   });
 };
+
+export const findSupplierIdRepository = async (supplierId: string) => {
+  return prisma.supplier.findUnique({
+    where: {
+      id: supplierId,
+    },
+  });
+};

@@ -6,6 +6,7 @@ import { supplierSchema } from "../validators/suppliers/supplier.validator";
 import SupplierController from "../controllers/suppliers/suppliers.controller";
 import { getAllSupplierSchema } from "../validators/suppliers/getAllSuppliers.validator";
 import { idSchema } from "../validators/commons/id.validator";
+import { updateSupplierRequestSchema } from "../validators/suppliers/updateSupplier.validator";
 
 const router = Router();
 router.post(
@@ -23,6 +24,12 @@ router.get(
   "/suppliers/:id",
   validate(idSchema),
   SupplierController.getSupplierByIdController,
+);
+router.patch(
+  "/suppliers/:id",
+  permit(Roles.ADMIN, Roles.MANAGER),
+  validate(updateSupplierRequestSchema),
+  SupplierController.updateSupplierByIdController,
 );
 
 export default router;

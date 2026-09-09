@@ -30,5 +30,16 @@ export const getSupplierByIdRepository = async (supplierId: string) => {
     where: {
       id: supplierId,
     },
+    include: {
+      productSuppliers: {
+        omit: {
+          productId: true,
+          supplierId: true,
+        },
+        include: {
+          product: true,
+        },
+      },
+    },
   });
 };

@@ -106,7 +106,7 @@ export const getArticleByIdRepository = async (articleId: string) => {
           supplierId: true,
         },
         include: {
-          Supplier: true,
+          supplier: true,
         },
       },
     },

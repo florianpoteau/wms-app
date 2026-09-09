@@ -1,9 +1,6 @@
 import { Router } from "express";
 import { validate } from "../middlewares/validate.middleware";
-import {
-  productSchema,
-  updateProductSchema,
-} from "../validators/articles/article.validator";
+import { productSchema } from "../validators/articles/article.validator";
 import { getAllArticleSchema } from "../validators/articles/getAllArticle.validator";
 import { idSchema } from "../validators/commons/id.validator";
 import { permit } from "../middlewares/permit.middleware";

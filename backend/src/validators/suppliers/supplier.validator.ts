@@ -24,10 +24,13 @@ export const supplierSchemaBody = z.object({
     .string()
     .min(1, "La ville est obligatoire")
     .max(30, "La ville ne peut pas dépasser 30 caractères"),
+  productSuppliers: z.array(z.uuid()).default([]),
 });
 
 export const supplierSchema = z.object({
   body: supplierSchemaBody,
 });
+export const updateSupplierSchema = supplierSchemaBody.partial();
 
+export type UpdateSupplierInput = z.infer<typeof updateSupplierSchema>;
 export type SupplierInput = z.infer<typeof supplierSchemaBody>;
