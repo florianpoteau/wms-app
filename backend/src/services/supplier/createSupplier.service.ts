@@ -1,6 +1,6 @@
 import AppError from "../../error/AppError.middleware";
 import { ERROR } from "../../error/errorMessages";
-import { createSupplierRepository } from "../../repositories/supplier/createSupplierRepository";
+import { createSupplierRepository } from "../../repositories/supplier/createSupplier.repository";
 import {
   findSupplierByEmailRepository,
   findSupplierByPhoneRepository,

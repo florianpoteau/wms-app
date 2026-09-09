@@ -5,7 +5,7 @@ import {
   findSupplierByPhoneRepository,
   findSupplierIdRepository,
 } from "../../repositories/supplier/findSupplierRepository";
-import { updateSupplierRepository } from "../../repositories/supplier/updateSupplierRepository";
+import { updateSupplierRepository } from "../../repositories/supplier/updateSupplier.repository";
 import type {
   SupplierInput,
   UpdateSupplierInput,
