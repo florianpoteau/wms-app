@@ -32,6 +32,7 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
           name: "asc",
         },
         select: {
+          id: true,
           reference: true,
           name: true,
           description: true,
@@ -77,6 +78,7 @@ export const getAllArticleRepository = async (data: AllProductInput) => {
           name: "asc",
         },
         select: {
+          id: true,
           reference: true,
           name: true,
           description: true,

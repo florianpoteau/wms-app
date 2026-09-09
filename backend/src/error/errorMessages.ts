@@ -31,4 +31,8 @@ export const ERROR = {
     statusCode: 409,
     message: "this phone number is already in use",
   },
+  SUPPLIER_NOT_FOUND: {
+    statusCode: 404,
+    message: "Supplier not found",
+  },
 };
