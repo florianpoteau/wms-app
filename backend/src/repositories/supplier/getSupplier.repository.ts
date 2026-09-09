@@ -1,5 +1,7 @@
+import { id } from "zod/v4/locales";
 import { prisma } from "../../lib/prisma";
 import type { AllSupplierInput } from "../../validators/suppliers/getAllSuppliers.validator";
+import type { SupplierInput } from "../../validators/suppliers/supplier.validator";
 
 export const getAllSupplierRepository = async (data: AllSupplierInput) => {
   const [suppliers, totalSupplier] = await prisma.$transaction([
@@ -21,4 +23,12 @@ export const getAllSupplierRepository = async (data: AllSupplierInput) => {
   ]);
 
   return { suppliers, totalSupplier };
+};
+
+export const getSupplierByIdRepository = async (supplierId: string) => {
+  return await prisma.supplier.findUnique({
+    where: {
+      id: supplierId,
+    },
+  });
 };
