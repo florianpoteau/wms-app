@@ -3,6 +3,7 @@ import authRoutes from "./routes/auth.routes";
 import loginRoutes from "./routes/login.routes";
 import articleRoutes from "./routes/articles.routes";
 import supplierRoutes from "./routes/suppliers.routes";
+import warehouseRoutes from "./routes/warehouses.routes";
 import cookieParser from "cookie-parser";
 import { authMiddleware } from "./middlewares/validateJwt.middleware";
 import { errorHandling } from "./middlewares/error.middleware";
@@ -20,5 +21,6 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api", articleRoutes);
 app.use("/api", supplierRoutes);
+app.use("/api", warehouseRoutes);
 app.use(errorHandling);
 export default app;
