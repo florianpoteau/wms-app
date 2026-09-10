@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import { createSupplierService } from "../../services/supplier/createSupplier.service";
-import { getAllSupplierService } from "../../services/supplier/getAllSupplier.service";
-import { getSupplierByIdService } from "../../services/supplier/getSupplier.service";
-import { updateSupplierService } from "../../services/supplier/updateSupplier.service";
-import { deleteSupplierService } from "../../services/supplier/deleteSupplier.service";
+import { createSupplierService } from "../../services/suppliers/createSupplier.service";
+import { getAllSupplierService } from "../../services/suppliers/getAllSupplier.service";
+import { getSupplierByIdService } from "../../services/suppliers/getSupplier.service";
+import { updateSupplierService } from "../../services/suppliers/updateSupplier.service";
+import { deleteSupplierService } from "../../services/suppliers/deleteSupplier.service";
 
 export default class SupplierController {
   static getAllSupplierController = async (req: Request, res: Response) => {

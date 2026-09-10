@@ -1,9 +1,7 @@
-import { id } from "zod/v4/locales";
 import { prisma } from "../../lib/prisma";
-import type { AllSupplierInput } from "../../validators/suppliers/getAllSuppliers.validator";
-import type { SupplierInput } from "../../validators/suppliers/supplier.validator";
+import type { PaginationInput } from "../../validators/commons/getAllPaginationQuery.validator";
 
-export const getAllSupplierRepository = async (data: AllSupplierInput) => {
+export const getAllSupplierRepository = async (data: PaginationInput) => {
   const [suppliers, totalSupplier] = await prisma.$transaction([
     prisma.supplier.findMany({
       take: data.limit,

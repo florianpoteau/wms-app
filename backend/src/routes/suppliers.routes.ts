@@ -4,9 +4,9 @@ import { validate } from "../middlewares/validate.middleware";
 import { Roles } from "../../generated/prisma/enums";
 import { supplierSchema } from "../validators/suppliers/supplier.validator";
 import SupplierController from "../controllers/suppliers/suppliers.controller";
-import { getAllSupplierSchema } from "../validators/suppliers/getAllSuppliers.validator";
 import { idSchema } from "../validators/commons/id.validator";
 import { updateSupplierRequestSchema } from "../validators/suppliers/updateSupplier.validator";
+import { getAllPaginationSchema } from "../validators/commons/getAllPaginationQuery.validator";
 
 const router = Router();
 router.post(
@@ -17,7 +17,7 @@ router.post(
 );
 router.get(
   "/suppliers",
-  validate(getAllSupplierSchema),
+  validate(getAllPaginationSchema),
   SupplierController.getAllSupplierController,
 );
 router.get(
