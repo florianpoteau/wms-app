@@ -5,9 +5,16 @@ import { permit } from "../middlewares/permit.middleware";
 import { Roles } from "../../generated/prisma/enums";
 import WarehouseController from "../controllers/warehouses/warehouses.controller";
 import { idSchema } from "../validators/commons/id.validator";
+import { warehouseSchema } from "../validators/warehouses/warehouse.validator";
 
 const router = Router();
 
+router.post(
+  "/warehouses",
+  permit(Roles.ADMIN),
+  validate(warehouseSchema),
+  WarehouseController.createWarehouseController,
+);
 router.get(
   "/warehouses",
   permit(Roles.ADMIN, Roles.MANAGER),
