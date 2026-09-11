@@ -35,4 +35,8 @@ export const ERROR = {
     statusCode: 404,
     message: "Supplier not found",
   },
+  WAREHOUSE_NOT_FOUND: {
+    statusCode: 404,
+    message: "Warehouse not found",
+  },
 };

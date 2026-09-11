@@ -272,11 +272,35 @@ async function seedProductSupplier(products: Product[], suppliers: Supplier[]) {
   });
 }
 
+// Warehouses
+
+async function seedWarehouses() {
+  await prisma.warehouse.create({
+    data: {
+      name: "Entrepôt 1",
+      address: "1 rue des entrepôts",
+    },
+  });
+  await prisma.warehouse.create({
+    data: {
+      name: "Entrepôt 2",
+      address: "2 rue des entrepôts",
+    },
+  });
+  await prisma.warehouse.create({
+    data: {
+      name: "Entrepôt 3",
+      address: "3 rue des entrepôts",
+    },
+  });
+}
+
 async function main() {
   await seedUsers();
   const products = await seedProduct();
   const suppliers = await seedSupplier();
   await seedProductSupplier(products, suppliers);
+  await seedWarehouses();
 }
 
 main()

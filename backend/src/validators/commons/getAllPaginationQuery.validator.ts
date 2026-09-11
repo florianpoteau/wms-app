@@ -1,6 +1,6 @@
 import z from "zod";
 
-const getAllSupplierQuerySchema = z.object({
+const getAllPaginationQuerySchema = z.object({
   page: z.coerce.number().min(1, "La page doit être supérieur à 0"),
   limit: z.coerce
     .number()
@@ -9,8 +9,8 @@ const getAllSupplierQuerySchema = z.object({
     .max(20, "La limite ne doit pas dépassser 20 caractères"),
 });
 
-export const getAllSupplierSchema = z.object({
-  query: getAllSupplierQuerySchema,
+export const getAllPaginationSchema = z.object({
+  query: getAllPaginationQuerySchema,
 });
 
-export type AllSupplierInput = z.infer<typeof getAllSupplierQuerySchema>;
+export type PaginationInput = z.infer<typeof getAllPaginationQuerySchema>;

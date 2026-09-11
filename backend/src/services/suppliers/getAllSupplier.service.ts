@@ -1,9 +1,9 @@
 import AppError from "../../error/AppError.middleware";
 import { ERROR } from "../../error/errorMessages";
 import { getAllSupplierRepository } from "../../repositories/supplier/getSupplier.repository";
-import type { AllSupplierInput } from "../../validators/suppliers/getAllSuppliers.validator";
+import type { PaginationInput } from "../../validators/commons/getAllPaginationQuery.validator";
 
-export async function getAllSupplierService(data: AllSupplierInput) {
+export async function getAllSupplierService(data: PaginationInput) {
   const { suppliers, totalSupplier } = await getAllSupplierRepository(data);
 
   const totalPages = Math.ceil(totalSupplier / data.limit);
