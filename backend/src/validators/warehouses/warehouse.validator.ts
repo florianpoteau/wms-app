@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { uuid } from "zod";
 
 export const warehouseSchemaBody = z.object({
   name: z
@@ -11,9 +11,10 @@ export const warehouseSchemaBody = z.object({
     .min(1, "L'adresse est obligatoire")
     .max(100, "L'adresse ne peut pas dépasser 100 caractères")
     .trim(),
+  zones: z.array(z.uuid()).default([]),
 });
 
-export const warehouseBody = z.object({
+export const warehouseSchema = z.object({
   body: warehouseSchemaBody,
 });
 
