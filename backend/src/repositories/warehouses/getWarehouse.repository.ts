@@ -1,5 +1,6 @@
 import { prisma } from "../../lib/prisma";
 import type { PaginationInput } from "../../validators/commons/getAllPaginationQuery.validator";
+import type { warehouseInput } from "../../validators/warehouses/warehouse.validator";
 
 export const getAllWarehouseRepository = async (data: PaginationInput) => {
   const [warehouses, totalWarehouse] = await prisma.$transaction([
@@ -21,4 +22,18 @@ export const getAllWarehouseRepository = async (data: PaginationInput) => {
     warehouses,
     totalWarehouse,
   };
+};
+export const getWarehouseByIdRepository = async (warehouseId: string) => {
+  return prisma.warehouse.findUnique({
+    where: {
+      id: warehouseId,
+    },
+    include: {
+      zones: {
+        include: {
+          locations: true,
+        },
+      },
+    },
+  });
 };
