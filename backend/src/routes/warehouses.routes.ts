@@ -4,6 +4,7 @@ import { getAllPaginationSchema } from "../validators/commons/getAllPaginationQu
 import { permit } from "../middlewares/permit.middleware";
 import { Roles } from "../../generated/prisma/enums";
 import WarehouseController from "../controllers/warehouses/warehouses.controller";
+import { idSchema } from "../validators/commons/id.validator";
 
 const router = Router();
 
@@ -12,6 +13,13 @@ router.get(
   permit(Roles.ADMIN, Roles.MANAGER),
   validate(getAllPaginationSchema),
   WarehouseController.getAllWarehouseController,
+);
+
+router.get(
+  "/warehouses/:id",
+  permit(Roles.ADMIN, Roles.MANAGER),
+  validate(idSchema),
+  WarehouseController.getWarehouseByIdController,
 );
 
 export default router;
