@@ -2,6 +2,7 @@ import type { Response, Request } from "express";
 import { getAllZoneService } from "../../services/zones/getAllZone.service";
 import { getZoneByIdService } from "../../services/zones/getZoneById.service";
 import { createZoneService } from "../../services/zones/createZone.service";
+import { updateZoneService } from "../../services/zones/updateZone.service";
 
 export class ZoneController {
   static getAllZoneController = async (req: Request, res: Response) => {
@@ -19,5 +20,11 @@ export class ZoneController {
     const data = res.locals.validated;
     await createZoneService(data.body);
     return res.status(201).send();
+  };
+
+  static updateZoneController = async (req: Request, res: Response) => {
+    const data = res.locals.validated;
+    await updateZoneService(data.params.id, data.body);
+    return res.status(200).send();
   };
 }

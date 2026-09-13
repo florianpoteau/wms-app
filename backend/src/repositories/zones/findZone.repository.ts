@@ -8,7 +8,7 @@ export const findZoneIdRepository = async (zoneId: string) => {
   });
 };
 
-export const findZoneCodeRepository = async (code: string) => {
+export const findZoneCodeRepository = async (code: string | undefined) => {
   return prisma.zone.findUnique({
     where: {
       code: code,
