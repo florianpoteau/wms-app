@@ -303,25 +303,80 @@ async function seedWarehouses() {
 // Zones
 
 async function seedZones(warehouses: any) {
-  await prisma.zone.create({
+  const zone1 = await prisma.zone.create({
     data: {
       name: "Zone A",
       code: "A",
       warehouseId: warehouses.warehouse1.id,
     },
   });
-  await prisma.zone.create({
+  const zone2 = await prisma.zone.create({
     data: {
       name: "Zone B",
       code: "B",
-      warehouseId: warehouses.warehouse2.id,
+      warehouseId: warehouses.warehouse1.id,
     },
   });
-  await prisma.zone.create({
+  const zone3 = await prisma.zone.create({
     data: {
       name: "Zone C",
       code: "C",
-      warehouseId: warehouses.warehouse3.id,
+      warehouseId: warehouses.warehouse2.id,
+    },
+  });
+  return {
+    zone1,
+    zone2,
+    zone3,
+  };
+}
+
+// Locations
+
+async function seedLocations(zones: any) {
+  await prisma.location.create({
+    data: {
+      name: "Zone A",
+      code: "A-01-01",
+      capacity: 100,
+      active: true,
+      zoneId: zones.zone1.id,
+    },
+  });
+  await prisma.location.create({
+    data: {
+      name: "Zone A",
+      code: "A-01-02",
+      capacity: 150,
+      active: true,
+      zoneId: zones.zone1.id,
+    },
+  });
+  await prisma.location.create({
+    data: {
+      name: "Zone A",
+      code: "A-02-01",
+      capacity: 200,
+      active: true,
+      zoneId: zones.zone1.id,
+    },
+  });
+  await prisma.location.create({
+    data: {
+      name: "Zone B",
+      code: "B-01-01",
+      capacity: 100,
+      active: true,
+      zoneId: zones.zone2.id,
+    },
+  });
+  await prisma.location.create({
+    data: {
+      name: "Zone C",
+      code: "C-01-01",
+      capacity: 150,
+      active: true,
+      zoneId: zones.zone3.id,
     },
   });
 }
@@ -332,7 +387,8 @@ async function main() {
   const suppliers = await seedSupplier();
   await seedProductSupplier(products, suppliers);
   const warehouses = await seedWarehouses();
-  await seedZones(warehouses);
+  const locations = await seedZones(warehouses);
+  await seedLocations(locations);
 }
 
 main()
