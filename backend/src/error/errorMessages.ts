@@ -43,4 +43,8 @@ export const ERROR = {
     statusCode: 404,
     message: "Zone not found",
   },
+  CODE_ALREADY_EXISTS: {
+    statusCode: 409,
+    message: "This code is already in use",
+  },
 };
