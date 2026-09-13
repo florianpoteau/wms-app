@@ -275,22 +275,53 @@ async function seedProductSupplier(products: Product[], suppliers: Supplier[]) {
 // Warehouses
 
 async function seedWarehouses() {
-  await prisma.warehouse.create({
+  const warehouse1 = await prisma.warehouse.create({
     data: {
       name: "Entrepôt 1",
       address: "1 rue des entrepôts",
     },
   });
-  await prisma.warehouse.create({
+  const warehouse2 = await prisma.warehouse.create({
     data: {
       name: "Entrepôt 2",
       address: "2 rue des entrepôts",
     },
   });
-  await prisma.warehouse.create({
+  const warehouse3 = await prisma.warehouse.create({
     data: {
       name: "Entrepôt 3",
       address: "3 rue des entrepôts",
+    },
+  });
+  return {
+    warehouse1,
+    warehouse2,
+    warehouse3,
+  };
+}
+
+// Zones
+
+async function seedZones(warehouses: any) {
+  await prisma.zone.create({
+    data: {
+      name: "Zone A",
+      code: "A",
+      warehouseId: warehouses.warehouse1.id,
+    },
+  });
+  await prisma.zone.create({
+    data: {
+      name: "Zone B",
+      code: "B",
+      warehouseId: warehouses.warehouse2.id,
+    },
+  });
+  await prisma.zone.create({
+    data: {
+      name: "Zone C",
+      code: "C",
+      warehouseId: warehouses.warehouse3.id,
     },
   });
 }
@@ -300,7 +331,8 @@ async function main() {
   const products = await seedProduct();
   const suppliers = await seedSupplier();
   await seedProductSupplier(products, suppliers);
-  await seedWarehouses();
+  const warehouses = await seedWarehouses();
+  await seedZones(warehouses);
 }
 
 main()

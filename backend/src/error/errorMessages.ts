@@ -39,4 +39,8 @@ export const ERROR = {
     statusCode: 404,
     message: "Warehouse not found",
   },
+  ZONE_NOT_FOUND: {
+    statusCode: 404,
+    message: "Zone not found",
+  },
 };
