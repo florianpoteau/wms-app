@@ -11,11 +11,11 @@ export const zoneSchemaBody = z.object({
     .min(1, "Le code est obligatoire")
     .max(10, "Le code ne doit pas dépasser 10 caractères")
     .trim(),
-  warehouse: z.uuid("L'identifiant de l'entrepôt est invalide"),
+  warehouseId: z.uuid("L'identifiant de l'entrepôt est invalide"),
 });
 
 export const zoneSchema = z.object({
   body: zoneSchemaBody,
 });
 
-export type ZoneSchemaInput = z.infer<typeof zoneSchemaBody>;
+export type ZoneInput = z.infer<typeof zoneSchemaBody>;
