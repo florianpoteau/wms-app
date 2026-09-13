@@ -6,6 +6,7 @@ import { Roles } from "../../generated/prisma/enums";
 import WarehouseController from "../controllers/warehouses/warehouses.controller";
 import { idSchema } from "../validators/commons/id.validator";
 import { warehouseSchema } from "../validators/warehouses/warehouse.validator";
+import { updateWarehouseRequestSchema } from "../validators/warehouses/updateWarehouse.validator";
 
 const router = Router();
 
@@ -27,6 +28,12 @@ router.get(
   permit(Roles.ADMIN, Roles.MANAGER),
   validate(idSchema),
   WarehouseController.getWarehouseByIdController,
+);
+router.patch(
+  "/warehouses/:id",
+  permit(Roles.ADMIN),
+  validate(updateWarehouseRequestSchema),
+  WarehouseController.updateWarehouseController,
 );
 
 export default router;

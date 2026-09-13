@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { getAllWarehouseService } from "../../services/warehouses/getAllWarehouse.service";
 import { getWarehouseByIdService } from "../../services/warehouses/getWarehouseById.service";
 import { createWarehouseService } from "../../services/warehouses/createWarehouse.service";
+import { updateWarehouseService } from "../../services/warehouses/updateWarehouse.service";
 
 export default class WarehouseController {
   static getAllWarehouseController = async (req: Request, res: Response) => {
@@ -20,5 +21,11 @@ export default class WarehouseController {
     const data = res.locals.validated.body;
     await createWarehouseService(data);
     return res.status(201).send();
+  };
+
+  static updateWarehouseController = async (req: Request, res: Response) => {
+    const data = res.locals.validated;
+    await updateWarehouseService(data.params.id, data.body);
+    return res.status(200).send();
   };
 }

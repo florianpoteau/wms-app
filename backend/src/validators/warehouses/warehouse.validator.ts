@@ -17,5 +17,7 @@ export const warehouseSchemaBody = z.object({
 export const warehouseSchema = z.object({
   body: warehouseSchemaBody,
 });
+export const updateWarehouseSchema = warehouseSchemaBody.partial();
 
+export type updateWarehouseInput = z.infer<typeof updateWarehouseSchema>;
 export type warehouseInput = z.infer<typeof warehouseSchemaBody>;
