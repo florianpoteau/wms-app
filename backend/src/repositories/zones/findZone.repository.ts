@@ -7,3 +7,11 @@ export const findZoneIdRepository = async (zoneId: string) => {
     },
   });
 };
+
+export const findZoneCodeRepository = async (code: string) => {
+  return prisma.zone.findUnique({
+    where: {
+      code: code,
+    },
+  });
+};

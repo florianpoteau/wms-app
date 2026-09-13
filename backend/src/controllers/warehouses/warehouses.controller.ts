@@ -6,8 +6,7 @@ import { updateWarehouseService } from "../../services/warehouses/updateWarehous
 
 export default class WarehouseController {
   static getAllWarehouseController = async (req: Request, res: Response) => {
-    const data = res.locals.validated.query;
-    const warehouses = await getAllWarehouseService(data);
+    const warehouses = await getAllWarehouseService();
     return res.status(200).json(warehouses);
   };
 
