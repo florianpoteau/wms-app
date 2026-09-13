@@ -1,5 +1,4 @@
 import { prisma } from "../../lib/prisma";
-import type { PaginationInput } from "../../validators/commons/getAllPaginationQuery.validator";
 
 export const getAllZoneRepository = async () => {
   return await prisma.zone.findMany({
@@ -11,6 +10,17 @@ export const getAllZoneRepository = async () => {
     },
     orderBy: {
       name: "asc",
+    },
+  });
+};
+
+export const getZoneByIdRepository = async (zoneId: string) => {
+  return await prisma.zone.findUnique({
+    where: {
+      id: zoneId,
+    },
+    include: {
+      locations: true,
     },
   });
 };
