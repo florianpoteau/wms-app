@@ -6,6 +6,7 @@ import { Roles } from "../../generated/prisma/enums";
 import { ZoneController } from "../controllers/zones/zone.controller";
 import { idSchema } from "../validators/commons/id.validator";
 import { zoneSchema } from "../validators/zones/zone.validator";
+import { updateZoneRequestSchema } from "../validators/zones/updateZone.validator";
 
 const router = Router();
 
@@ -27,6 +28,13 @@ router.post(
   permit(Roles.ADMIN, Roles.MANAGER),
   validate(zoneSchema),
   ZoneController.createZoneController,
+);
+
+router.patch(
+  "/zones/:id",
+  permit(Roles.ADMIN, Roles.MANAGER),
+  validate(updateZoneRequestSchema),
+  ZoneController.updateZoneController,
 );
 
 export default router;
