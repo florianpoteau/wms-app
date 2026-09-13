@@ -19,7 +19,6 @@ router.post(
 router.get(
   "/warehouses",
   permit(Roles.ADMIN, Roles.MANAGER),
-  validate(getAllPaginationSchema),
   WarehouseController.getAllWarehouseController,
 );
 
