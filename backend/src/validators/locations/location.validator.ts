@@ -19,3 +19,9 @@ export const locationSchemaBody = z.object({
   active: z.boolean().default(true),
   zoneId: z.uuid(),
 });
+
+export const LocationSchema = z.object({
+  body: locationSchemaBody,
+});
+
+export type LocationInput = z.infer<typeof locationSchemaBody>;
