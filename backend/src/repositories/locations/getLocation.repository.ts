@@ -15,3 +15,14 @@ export const getAllLocationRepository = async () => {
     },
   });
 };
+
+export const getLocationByIdRepository = async (locationId: string) => {
+  return prisma.location.findUnique({
+    where: {
+      id: locationId,
+    },
+    include: {
+      zone: true,
+    },
+  });
+};
