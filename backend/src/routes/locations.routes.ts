@@ -4,7 +4,8 @@ import { Roles } from "../../generated/prisma/enums";
 import { validate } from "../middlewares/validate.middleware";
 import { idSchema } from "../validators/commons/id.validator";
 import LocationController from "../controllers/locations/location.controller";
-import { LocationSchema } from "../validators/locations/location.validator";
+import { locationSchema } from "../validators/locations/location.validator";
+import { updateLocationRequestSchema } from "../validators/locations/updateLocation.validator";
 
 const router = Router();
 
@@ -24,8 +25,15 @@ router.get(
 router.post(
   "/locations",
   permit(Roles.ADMIN, Roles.MANAGER),
-  validate(LocationSchema),
-  LocationController.createLocationRepository,
+  validate(locationSchema),
+  LocationController.createLocationController,
+);
+
+router.patch(
+  "/locations/:id",
+  permit(Roles.ADMIN, Roles.MANAGER),
+  validate(updateLocationRequestSchema),
+  LocationController.updateLocationController,
 );
 
 export default router;

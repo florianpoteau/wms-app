@@ -20,8 +20,11 @@ export const locationSchemaBody = z.object({
   zoneId: z.uuid(),
 });
 
-export const LocationSchema = z.object({
+export const locationSchema = z.object({
   body: locationSchemaBody,
 });
 
+export const updateLocationSchema = locationSchemaBody.partial();
+
 export type LocationInput = z.infer<typeof locationSchemaBody>;
+export type UpdateLocationInput = z.infer<typeof updateLocationSchema>;
