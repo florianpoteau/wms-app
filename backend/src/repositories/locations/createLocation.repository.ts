@@ -7,7 +7,11 @@ export const createLocationRepository = async (data: LocationInput) => {
       name: data.name,
       code: data.code,
       capacity: data.capacity,
-      zoneId: data.zoneId,
+      zone: {
+        connect: {
+          id: data.zoneId,
+        },
+      },
     },
   });
 };

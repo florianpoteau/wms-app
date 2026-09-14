@@ -6,7 +6,11 @@ export const createZoneRepository = async (data: ZoneInput) => {
     data: {
       name: data.name,
       code: data.code,
-      warehouseId: data.warehouseId,
+      warehouse: {
+        connect: {
+          id: data.warehouseId,
+        },
+      },
     },
   });
 };
