@@ -334,7 +334,7 @@ async function seedZones(warehouses: any) {
 // Locations
 
 async function seedLocations(zones: any) {
-  await prisma.location.create({
+  const location1 = await prisma.location.create({
     data: {
       name: "Zone A",
       code: "A-01-01",
@@ -343,7 +343,7 @@ async function seedLocations(zones: any) {
       zoneId: zones.zone1.id,
     },
   });
-  await prisma.location.create({
+  const location2 = await prisma.location.create({
     data: {
       name: "Zone A",
       code: "A-01-02",
@@ -352,7 +352,7 @@ async function seedLocations(zones: any) {
       zoneId: zones.zone1.id,
     },
   });
-  await prisma.location.create({
+  const location3 = await prisma.location.create({
     data: {
       name: "Zone A",
       code: "A-02-01",
@@ -361,7 +361,7 @@ async function seedLocations(zones: any) {
       zoneId: zones.zone1.id,
     },
   });
-  await prisma.location.create({
+  const location4 = await prisma.location.create({
     data: {
       name: "Zone B",
       code: "B-01-01",
@@ -370,13 +370,60 @@ async function seedLocations(zones: any) {
       zoneId: zones.zone2.id,
     },
   });
-  await prisma.location.create({
+  const location5 = await prisma.location.create({
     data: {
       name: "Zone C",
       code: "C-01-01",
       capacity: 150,
       active: true,
       zoneId: zones.zone3.id,
+    },
+  });
+  return {
+    location1,
+    location2,
+    location3,
+    location4,
+    location5,
+  };
+}
+
+// Stocks
+
+async function seedStocks(products: any, locations: any) {
+  await prisma.stock.create({
+    data: {
+      quantity: 20,
+      productId: products[0].id,
+      locationId: locations.location1.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 80,
+      productId: products[4].id,
+      locationId: locations.location1.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 40,
+      productId: products[2].id,
+      locationId: locations.location1.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 90,
+      productId: products[1].id,
+      locationId: locations.location2.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 90,
+      productId: products[3].id,
+      locationId: locations.location3.id,
     },
   });
 }
@@ -387,8 +434,9 @@ async function main() {
   const suppliers = await seedSupplier();
   await seedProductSupplier(products, suppliers);
   const warehouses = await seedWarehouses();
-  const locations = await seedZones(warehouses);
-  await seedLocations(locations);
+  const zones = await seedZones(warehouses);
+  const locations = await seedLocations(zones);
+  await seedStocks(products, locations);
 }
 
 main()
