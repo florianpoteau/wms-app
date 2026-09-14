@@ -47,4 +47,8 @@ export const ERROR = {
     statusCode: 409,
     message: "This code is already in use",
   },
+  LOCATION_NOT_FOUND: {
+    statusCode: 404,
+    message: "Location not found",
+  },
 };
