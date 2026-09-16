@@ -3,7 +3,9 @@ import { getAllStockService } from "../../services/stocks/getAllStock.service";
 
 export default class StockController {
   static getAllStockController = async (req: Request, res: Response) => {
-    const stocks = await getAllStockService();
+    const data = res.locals.validated;
+
+    const stocks = await getAllStockService(data.query);
     return res.status(200).json(stocks);
   };
 }
