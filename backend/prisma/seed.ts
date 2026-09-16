@@ -400,9 +400,16 @@ async function seedStocks(products: any, locations: any) {
   });
   await prisma.stock.create({
     data: {
-      quantity: 80,
-      productId: products[4].id,
-      locationId: locations.location1.id,
+      quantity: 90,
+      productId: products[0].id,
+      locationId: locations.location2.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 35,
+      productId: products[1].id,
+      locationId: locations.location5.id,
     },
   });
   await prisma.stock.create({
@@ -415,15 +422,50 @@ async function seedStocks(products: any, locations: any) {
   await prisma.stock.create({
     data: {
       quantity: 90,
-      productId: products[1].id,
+      productId: products[3].id,
+      locationId: locations.location3.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 80,
+      productId: products[4].id,
+      locationId: locations.location1.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 60,
+      productId: products[5].id,
       locationId: locations.location2.id,
     },
   });
   await prisma.stock.create({
     data: {
-      quantity: 90,
-      productId: products[3].id,
+      quantity: 15,
+      productId: products[6].id,
       locationId: locations.location3.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 5,
+      productId: products[7].id,
+      locationId: locations.location4.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 30,
+      productId: products[8].id,
+      locationId: locations.location3.id,
+    },
+  });
+  await prisma.stock.create({
+    data: {
+      quantity: 45,
+      productId: products[9].id,
+      locationId: locations.location5.id,
     },
   });
 }
