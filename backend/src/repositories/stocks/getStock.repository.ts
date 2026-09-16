@@ -13,6 +13,7 @@ export const getAllStockRepository = async (data: GetAllStockInput) => {
               contains: article,
               mode: "insensitive" as const,
             },
+            active: true,
           },
         }
       : {}),
@@ -51,6 +52,7 @@ export const getAllStockRepository = async (data: GetAllStockInput) => {
         product: {
           select: {
             reference: true,
+            minimumStock: true,
           },
         },
       },

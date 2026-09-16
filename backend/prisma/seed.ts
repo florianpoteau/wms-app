@@ -88,7 +88,7 @@ async function seedProduct() {
       description: "Clavier mécanique USB AZERTY",
       barcode: "376000000001",
       unit: "piece",
-      minimumStock: 10,
+      minimumStock: 20,
       active: true,
     },
     {
@@ -97,7 +97,7 @@ async function seedProduct() {
       description: "Souris sans fil Bluetooth avec capteur optique",
       barcode: "376000000002",
       unit: "piece",
-      minimumStock: 15,
+      minimumStock: 30,
       active: true,
     },
     {
@@ -106,7 +106,7 @@ async function seedProduct() {
       description: "Écran LED Full HD 24 pouces",
       barcode: "376000000003",
       unit: "piece",
-      minimumStock: 5,
+      minimumStock: 15,
       active: false,
     },
     {
@@ -115,7 +115,7 @@ async function seedProduct() {
       description: "Écran LED 27 pouces résolution 2560x1440",
       barcode: "376000000004",
       unit: "piece",
-      minimumStock: 5,
+      minimumStock: 15,
       active: true,
     },
     {
@@ -142,7 +142,7 @@ async function seedProduct() {
       description: "Casque audio filaire avec microphone intégré",
       barcode: "376000000007",
       unit: "piece",
-      minimumStock: 10,
+      minimumStock: 25,
       active: true,
     },
     {
